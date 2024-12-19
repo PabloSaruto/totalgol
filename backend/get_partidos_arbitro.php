@@ -21,6 +21,8 @@ $sql = "
         p.IDEquipoVisitante,
         p.Fecha,
         p.Jornada,
+        p.GolesLocal,
+        p.GolesVisitante,
         el.NombreEquipo AS NombreEquipoLocal,
         el.NombreEntrenador AS EntrenadorLocal,
         el.ColorVestimenta AS ColorVestimentaLocal,
@@ -45,6 +47,8 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $partidos = [];
     while ($row = $result->fetch_assoc()) {
+        // Verificar si los goles son nulos y asignar una "X"
+        $row['Resultado'] = (is_null($row['GolesLocal']) || is_null($row['GolesVisitante'])) ? 'X' : $row['GolesLocal'] . ' - ' . $row['GolesVisitante'];
         $partidos[] = $row;
     }
     echo json_encode(['status' => 'success', 'partidos' => $partidos]);

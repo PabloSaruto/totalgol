@@ -66,6 +66,3 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Aquí puedes agregar estilos adicionales si los necesitas, pero la mayoría de la personalización se hace con las clases de Tailwind */
-</style>

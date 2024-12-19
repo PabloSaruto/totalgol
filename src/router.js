@@ -9,6 +9,7 @@ import ClasificacionLiga from './components/ClasificacionLiga.vue';
 import JugadoresEquipo from './components/JugadoresEquipo.vue';
 import LoginArbitros from './components/LoginArbitros.vue';
 import HomePageArbitros from './components/HomePageArbitros.vue';
+import InsertarResultados from './components/insertarResultados.vue';
 
 
 
@@ -54,7 +55,13 @@ const router = new Router({
         path: '/home-arbitros',
         name: 'HomePageArbitros',
         component: HomePageArbitros
+      },
+      {
+        path: '/insertar-resultados/:partidoId',
+        name: 'InsertarResultados',
+        component: InsertarResultados
       }
+
 
       
   ]

@@ -57,6 +57,20 @@
           <div class="partido-fecha text-center text-gray-600 text-lg">
             <span>Fecha: {{ formatFecha(partido.Fecha) }}</span>
           </div>
+
+          <!-- Mostrar resultado -->
+          <div class="partido-resultado text-center mt-4">
+            <strong>Resultado: </strong>
+            <span>{{ partido.Resultado }}</span> <!-- Aquí mostramos el resultado o "X" -->
+          </div>
+
+          <!-- Botón para insertar resultados -->
+          <div class="text-center mt-6">
+            <router-link :to="{ name: 'InsertarResultados', params: { partidoId: partido.ID_partido } }" class="btn-insertar bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700">
+              Insertar Resultados
+            </router-link>
+          </div>
+
         </div>
       </div>
     </div>
@@ -124,7 +138,6 @@ export default {
       // Convertir el nombre del equipo a minúsculas y reemplazar espacios por guiones
       const nombreImagen = nombreEquipo.toLowerCase().replace(/\s+/g, '-');
       
-      // Construir la URL del logo, asumiendo que los logos están en "http://localhost/totalgol/uploads/"
       return require(`@/assets/img/${nombreImagen}.png`);
     },
     formatFecha(fecha) {
