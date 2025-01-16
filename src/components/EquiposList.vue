@@ -42,15 +42,19 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Botón para volver atrás -->
+    <button @click="goBack" class="btn-back bg-yellow-600 text-white py-4 px-8 rounded-lg w-full mt-10 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+      Volver a la Página Principal
+    </button>
   </div>
 </template>
-
 
 <script>
 export default {
   data() {
     return {
-      equipos: []
+      equipos: [] // Inicializamos la lista de equipos vacía
     };
   },
   mounted() {
@@ -69,13 +73,18 @@ export default {
   },
   methods: {
     navigateToEquipo(idEquipo) {
+      // Redirigir a la página del equipo seleccionado
       this.$router.push({ name: 'JugadoresEquipo', params: { id: idEquipo } });
     },
     getEquipoImage(nombreEquipo) {
+      // Convertir el nombre del equipo en una imagen
       const nombreImagen = nombreEquipo.toLowerCase().replace(/\s+/g, '-');
       return require(`@/assets/img/${nombreImagen}.png`);
+    },
+    goBack() {
+      // Volver a la página principal
+      this.$router.push({ name: 'Home' });
     }
   }
 };
 </script>
-

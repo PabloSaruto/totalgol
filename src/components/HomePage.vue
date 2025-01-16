@@ -10,7 +10,6 @@
     <!-- Menú de Navegación -->
     <nav class="w-full bg-yellow-200 bg-opacity-90 py-4 shadow-lg">
       <div class="container mx-auto flex justify-around items-center">
-        <a @click="navigateTo('Competiciones')" class="nav-item">Competiciones</a>
         <a @click="navigateTo('Goleadores')" class="nav-item">Goleadores</a>
         <a @click="navigateTo('Equipos')" class="nav-item">Equipos</a>
         <a @click="navigateTo('Clasificacion')" class="nav-item">Clasificación</a>
@@ -19,7 +18,8 @@
 
     <!-- Login Árbitros -->
     <div class="mt-10 text-center">
-      <button @click="navigateTo('LoginArbitros')" class="btn-primary">Acceder como Árbitro</button>
+      <button @click="navigateTo('LoginArbitros')" class="bg-orange-500 text-white hover:bg-orange-600 focus:ring-2 focus:ring-orange-400 font-medium py-2 px-4 rounded"
+      >Acceder como Árbitro</button>
     </div>
 
     <!-- Contenido Principal -->
@@ -50,12 +50,9 @@
                   <strong class="text-lg">Jornada:</strong> {{ partido.Jornada }}<br />
                   <strong class="text-lg">Fecha:</strong> {{ new Date(partido.Fecha).toLocaleString() }}
                 </div>
-                <div class="text-xl font-bold">
-                  <span class="text-green-500">{{ partido.GolesLocal !== null ? partido.GolesLocal : 'X' }}</span> - 
-                  <span class="text-red-500">{{ partido.GolesVisitante !== null ? partido.GolesVisitante : 'X' }}</span>
-                </div>
+               
               </div>
-
+z
               <!-- Equipos -->
               <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">

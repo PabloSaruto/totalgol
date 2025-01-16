@@ -39,6 +39,9 @@
         </tr>
       </tbody>
     </table>
+    <button @click="goBack" class="btn-back bg-yellow-600 text-white py-4 px-8 rounded-lg w-full mt-10 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+      Volver a la Página Principal
+    </button>
   </div>
 </template>
 
@@ -69,6 +72,10 @@ export default {
     getEquipoImage(nombreEquipo) {
       const nombreImagen = nombreEquipo.toLowerCase().replace(/\s+/g, '-');  // Convertir espacios a guiones
       return require(`@/assets/img/${nombreImagen}.png`);  // Retornar la ruta a la imagen
+    },
+    goBack() {
+      // Volver a la página principal
+      this.$router.push({ name: 'Home' });
     },
 
     // Método para obtener el estilo del podium

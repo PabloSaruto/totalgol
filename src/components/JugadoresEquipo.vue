@@ -28,7 +28,11 @@
 
       <p v-else class="no-jugadores text-xl text-gray-600 mt-6">No hay jugadores para este equipo.</p>
     </div>
+    <button @click="goBack" class="btn-back bg-yellow-600 text-white py-4 px-8 rounded-lg w-full mt-10 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+    Volver a la Página Principal
+  </button>
   </div>
+  
 </template>
 
 <script>
@@ -61,6 +65,10 @@ export default {
     getEquipoImage() {
       const nombreImagen = this.equipo.NombreEquipo.toLowerCase().replace(/\s+/g, '-');
       return require(`@/assets/img/${nombreImagen}.png`);
+    },
+    goBack() {
+      // Volver a la página principal
+      this.$router.push({ name: 'Home' });
     }
   }
 };
