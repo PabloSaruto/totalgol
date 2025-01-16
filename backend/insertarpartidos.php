@@ -1,49 +1,47 @@
 <?php
-// Mostrar errores para depuración
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+require_once 'conexion.php'; // Asegúrate de que la conexión esté correctamente configurada
 
-// Establecer cabeceras CORS
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Allow-Headers: Content-Type");
-header('Content-Type: application/json');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtener los datos JSON enviados
+    $data = json_decode(file_get_contents('php://input'), true);
 
-// Incluir archivo de conexión a la base de datos
-include_once 'conexion.php';
+    if (!$data) {
+        echo json_encode(['status' => 'error', 'message' => 'No se enviaron datos válidos.']);
+        exit();
+    }
 
-// Obtener los datos enviados por el cliente
-$data = json_decode(file_get_contents('php://input'), true);
+    $partidoId = isset($data['partidoId']) ? intval($data['partidoId']) : null;
+    $golesLocal = isset($data['golesLocal']) ? intval($data['golesLocal']) : null;
+    $golesVisitante = isset($data['golesVisitante']) ? intval($data['golesVisitante']) : null;
 
-// Verificar si los datos no son nulos
-if ($data === null) {
-    echo json_encode(['status' => 'error', 'message' => 'Datos no válidos']);
-    exit();
-}
+    if (is_null($partidoId) || is_null($golesLocal) || is_null($golesVisitante)) {
+        echo json_encode(['status' => 'error', 'message' => 'Faltan datos obligatorios.']);
+        exit();
+    }
 
-// Obtener los valores del formulario
-$partidoId = $data['partidoId'];   // Obtener ID del partido desde el frontend
-$golesLocal = $data['golesLocal']; // Goles del equipo local
-$golesVisitante = $data['golesVisitante']; // Goles del equipo visitante
+    // Iniciar una transacción para garantizar integridad
+    $conn->begin_transaction();
+    try {
+        // Actualizar el marcador en la tabla principal de partidos
+        $queryPartido = "UPDATE partidos SET GolesLocal = ?, GolesVisitante = ? WHERE ID_partido = ?";
+        if ($stmtPartido = $conn->prepare($queryPartido)) {
+            $stmtPartido->bind_param("iii", $golesLocal, $golesVisitante, $partidoId);
+            $stmtPartido->execute();
+            $stmtPartido->close();
+        } else {
+            throw new Exception('Error al preparar la consulta para actualizar el marcador del partido.');
+        }
 
-// Validar que los goles no estén vacíos
-if (empty($golesLocal) || empty($golesVisitante)) {
-    echo json_encode(['status' => 'error', 'message' => 'Los goles no pueden estar vacíos']);
-    exit();
-}
-
-// Crear la consulta SQL para actualizar los goles del partido
-$consulta = "UPDATE partidos SET GolesLocal = '$golesLocal', GolesVisitante = '$golesVisitante' WHERE ID_partido = '$partidoId'";
-
-// Ejecutar la consulta
-if (mysqli_query($conn, $consulta)) {
-    // Respuesta exitosa
-    echo json_encode(['status' => 'success', 'message' => 'Resultado actualizado correctamente']);
+        // Confirmar la transacción
+        $conn->commit();
+        echo json_encode(['status' => 'success', 'message' => 'Resultados guardados correctamente.']);
+    } catch (Exception $e) {
+        // Revertir la transacción en caso de error
+        $conn->rollback();
+        echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+    }
 } else {
-    // Error en la ejecución de la consulta
-    echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el resultado']);
+    echo json_encode(['status' => 'error', 'message' => 'Método no permitido.']);
+    exit();
 }
-
-// Cerrar la conexión a la base de datos
-mysqli_close($conn);
 ?>
