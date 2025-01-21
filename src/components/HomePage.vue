@@ -10,7 +10,6 @@
     <!-- Menú de Navegación -->
     <nav class="w-full bg-yellow-200 bg-opacity-90 py-4 shadow-lg">
       <div class="container mx-auto flex justify-around items-center">
-        <a @click="navigateTo('Competiciones')" class="nav-item">Competiciones</a>
         <a @click="navigateTo('Goleadores')" class="nav-item">Goleadores</a>
         <a @click="navigateTo('Equipos')" class="nav-item">Equipos</a>
         <a @click="navigateTo('Clasificacion')" class="nav-item">Clasificación</a>
@@ -19,7 +18,8 @@
 
     <!-- Login Árbitros -->
     <div class="mt-10 text-center">
-      <button @click="navigateTo('LoginArbitros')" class="btn-primary">Acceder como Árbitro</button>
+      <button @click="navigateTo('LoginArbitros')" class="bg-orange-500 text-white hover:bg-orange-600 focus:ring-2 focus:ring-orange-400 font-medium py-2 px-4 rounded"
+      >Acceder como Árbitro</button>
     </div>
 
     <!-- Contenido Principal -->
@@ -50,10 +50,7 @@
                   <strong class="text-lg">Jornada:</strong> {{ partido.Jornada }}<br />
                   <strong class="text-lg">Fecha:</strong> {{ new Date(partido.Fecha).toLocaleString() }}
                 </div>
-                <div class="text-xl font-bold">
-                  <span class="text-green-500">{{ partido.GolesLocal !== null ? partido.GolesLocal : 'X' }}</span> - 
-                  <span class="text-red-500">{{ partido.GolesVisitante !== null ? partido.GolesVisitante : 'X' }}</span>
-                </div>
+               
               </div>
 
               <!-- Equipos -->
@@ -110,28 +107,71 @@
         </div>
         <div>
           <img src="@/assets/recursos/campodefutbol.jpg" alt="Campo de fútbol" class="rounded-lg shadow-lg max-w-full" />
+          
         </div>
+        <div>
+          <img src="@/assets/recursos/bet.jpg" alt="Campo de fútbol" class="rounded-lg shadow-lg max-w-full" />
+          
+        </div>
+        <div>
+          <img src="@/assets/recursos/wallpape.jpg" alt="Campo de fútbol" class="rounded-lg shadow-lg max-w-full" />
+          
+        </div>
+        <div class="flex justify-center gap-4">
+          <div class="w-48">
+            <img src="@/assets/recursos/dyba.jpg" alt="Campo de fútbol" class="rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300" />
+          </div>
+          <div class="w-48">
+            <img src="@/assets/recursos/fly.jpg" alt="Campo de fútbol" class="rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300" />
+          </div>
+          
+        </div>
+        <div>
+            <img src="@/assets/recursos/mesi.jpg" alt="Campo de fútbol" class="rounded-lg shadow-lg max-w-full" />
+            
+          </div>
+          <div> </div>
       </div>
     </main>
 
     <!-- Footer con Redes Sociales -->
-    <footer class="w-full bg-black bg-opacity-70 py-8 text-center text-white">
-      <h3 class="text-xl mb-6">¡Síguenos en nuestras redes sociales!</h3>
-      <div class="flex justify-center gap-6">
-        <a href="https://www.facebook.com" target="_blank" class="social-icon"><img src="@/assets/rs/face.png" alt="Facebook" /></a>
-        <a href="https://www.instagram.com" target="_blank" class="social-icon"><img src="@/assets/rs/insta.png" alt="Instagram" /></a>
-        <a href="https://www.youtube.com" target="_blank" class="social-icon"><img src="@/assets/rs/you.png" alt="YouTube" /></a>
-      </div>
-      <div class="mt-6">
-        <h4 class="text-lg mb-3">Mapa del Sitio</h4>
-        <ul class="flex justify-center gap-8 text-lg">
-          <li><a href="#competitions" class="footer-link">Competiciones</a></li>
-          <li><a href="#statistics" class="footer-link">Goleadores</a></li>
-          <li><a href="#teams" class="footer-link">Equipos</a></li>
-          <li><a href="#contact" class="footer-link">Contacto</a></li>
-        </ul>
-      </div>
-    </footer>
+    <!-- Footer con Redes Sociales -->
+<footer class="w-full bg-black bg-opacity-70 py-8 text-center text-white">
+  <h3 class="text-xl mb-6">¡Síguenos en nuestras redes sociales!</h3>
+  <div class="flex justify-center gap-6">
+    <a href="https://www.facebook.com" target="_blank" class="social-icon">
+      <img src="@/assets/rs/face.png" alt="Facebook" />
+    </a>
+    <a href="https://www.instagram.com" target="_blank" class="social-icon">
+      <img src="@/assets/rs/insta.png" alt="Instagram" />
+    </a>
+    <a href="https://www.youtube.com" target="_blank" class="social-icon">
+      <img src="@/assets/rs/you.png" alt="YouTube" />
+    </a>
+  </div>
+  <div class="mt-6">
+    <h4 class="text-lg mb-3">Mapa del Sitio</h4>
+    <ul class="flex justify-center gap-8 text-lg">
+    
+      <li>
+        <router-link to="Goleadores" class="footer-link">
+          Goleadores
+        </router-link>
+      </li>
+      <li>
+        <router-link to="Equipos" class="footer-link">
+          Equipos
+        </router-link>
+      </li>
+      <li>
+        <router-link to="https://id.ionos.es/identifier" class="footer-link">
+          Contacto
+        </router-link>
+      </li>
+    </ul>
+  </div>
+</footer>
+
   </div>
 </template>
 

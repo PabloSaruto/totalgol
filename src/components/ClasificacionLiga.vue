@@ -14,12 +14,12 @@
     <table class="min-w-full border-collapse table-auto bg-white rounded-lg shadow-md overflow-hidden">
       <thead>
         <tr>
-          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6 rounded-tl-lg">Posición</th>
-          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6">Imagen</th>
-          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6">Nombre del equipo</th>
-          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6">Entrenador</th>
-          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6">Color de vestimenta</th>
-          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6 rounded-tr-lg">Puntos</th>
+          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6 text-center rounded-tl-lg">Posición</th>
+          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6 text-center">Escudo</th>
+          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6 text-left">Nombre del equipo</th>
+          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6 text-left">Entrenador</th>
+          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6 text-left">Color de vestimenta</th>
+          <th class="bg-green-600 text-white text-lg font-semibold py-3 px-6 text-center rounded-tr-lg">Puntos</th>
         </tr>
       </thead>
       <tbody>
@@ -35,10 +35,15 @@
           <td class="py-4 px-6 text-lg">{{ equipo.NombreEquipo }}</td>
           <td class="py-4 px-6 text-lg">{{ equipo.NombreEntrenador }}</td>
           <td class="py-4 px-6 text-lg">{{ equipo.ColorVestimenta }}</td>
-          <td class="py-4 px-6 text-lg">{{ equipo.puntos }}</td>
+          <td class="py-4 px-6 text-lg text-center">{{ equipo.puntos }}</td>
         </tr>
       </tbody>
     </table>
+
+    <!-- Botón para volver atrás -->
+    <button @click="goBack" class="btn-back bg-yellow-600 text-white py-4 px-8 rounded-lg w-full mt-10 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+      Volver a la Página Principal
+    </button>
   </div>
 </template>
 
@@ -70,6 +75,10 @@ export default {
       const nombreImagen = nombreEquipo.toLowerCase().replace(/\s+/g, '-');  // Convertir espacios a guiones
       return require(`@/assets/img/${nombreImagen}.png`);  // Retornar la ruta a la imagen
     },
+    goBack() {
+      // Volver a la página principal
+      this.$router.push({ name: 'Home' });
+    },
 
     // Método para obtener el estilo del podium
     getPodiumClass(index) {
@@ -88,4 +97,3 @@ export default {
   }
 };
 </script>
-

@@ -2,33 +2,26 @@
   <div class="insertar-resultados p-8 max-w-5xl mx-auto bg-white rounded-lg shadow-xl">
     <h1 class="text-3xl font-semibold text-green-600 text-center mb-6">Insertar Resultados</h1>
 
-    <div v-if="partido" class="mb-6">
-      <h2 class="text-2xl font-semibold text-gray-800 text-center mb-4">
-        Partido: {{ partido.NombreEquipoLocal }} vs {{ partido.NombreEquipoVisitante }}
-      </h2>
-      <p class="text-lg text-gray-700 text-center">
-        Jornada: {{ partido.Jornada }} | Fecha: {{ formatFecha(partido.Fecha) }}
-      </p>
-    </div>
-
     <form @submit.prevent="submitResultados" class="space-y-6">
       <div class="form-group">
         <label for="golesLocal" class="text-lg text-gray-700">Goles Equipo Local</label>
-        <input type="number" v-model="golesLocal" id="golesLocal" class="form-input w-full p-3 border border-gray-300 rounded-lg" placeholder="Ej. 3"  />
+        <input type="number" v-model="golesLocal" id="golesLocal" class="form-input w-full p-3 border border-gray-300 rounded-lg"  />
       </div>
 
       <div class="form-group">
         <label for="golesVisitante" class="text-lg text-gray-700">Goles Equipo Visitante</label>
-        <input type="number" v-model="golesVisitante" id="golesVisitante" class="form-input w-full p-3 border border-gray-300 rounded-lg" placeholder="Ej. 2"  />
+        <input type="number" v-model="golesVisitante" id="golesVisitante" class="form-input w-full p-3 border border-gray-300 rounded-lg" />
       </div>
-
-    
-
 
       <button type="submit" class="bg-blue-600 text-white py-4 px-8 rounded-lg w-full hover:bg-blue-700">
         Guardar Resultados
       </button>
     </form>
+
+    <!-- Botón para volver a la página principal de árbitros -->
+    <button @click="goToHomePageArbitros" class="bg-yellow-600 text-white py-4 px-8 rounded-lg w-full mt-6 hover:bg-yellow-700">
+      Volver 
+    </button>
   </div>
 </template>
 
@@ -67,12 +60,10 @@ export default {
     async submitResultados() {
       const partidoId = this.$route.params.partidoId;
 
-
       const data = {
         partidoId,
         golesLocal: this.golesLocal,
         golesVisitante: this.golesVisitante,
-        
       };
 
       try {
@@ -93,8 +84,11 @@ export default {
         console.error('Error al enviar los resultados:', error);
       }
     },
-   
-  
+    goToHomePageArbitros() {
+      this.$router.push({ name: 'HomePageArbitros' });
+      window.scrollTo(0, 0);
+
+    },
   },
 };
 </script>

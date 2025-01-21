@@ -1,9 +1,11 @@
 <template>
   <div class="home-arbitros p-8 max-w-5xl mx-auto bg-white rounded-lg shadow-xl">
     <!-- Header -->
-    <div class="header flex items-center justify-center pb-8 mb-10 border-b-4 border-green-600">
-      <img src="@/assets/logo.png" alt="Logo" class="logo w-56 h-auto mr-8" />
-      <h1 class="text-4xl font-bold text-green-600">Árbitros</h1>
+    <div @click="goBack" class="header flex flex-col items-center justify-center pb-8 mb-10 border-b-4 border-green-600">
+      <img src="@/assets/logo.png" alt="Logo" class="logo w-56 h-auto mb-4" />
+      <div>
+        <h1 class="text-4xl font-bold text-green-600">Sección de Árbitros</h1>
+      </div>
     </div>
 
     <!-- Info del árbitro -->
@@ -30,27 +32,27 @@
             <h3 class="text-2xl font-semibold">JORNADA {{ partido.Jornada }}</h3>
           </div>
 
-          <div class="partido-info flex justify-between items-start mb-6">
+          <div class="partido-info flex items-center justify-center mb-6">
             <!-- Equipo Local -->
-            <div class="equipo-info flex items-center w-1/2 space-x-6">
+            <div class="equipo-info flex items-center justify-end w-1/3 space-x-4">
               <img :src="getEquipoLogo(partido.NombreEquipoLocal)" alt="Logo Local" class="equipo-logo w-20 h-20" />
-              <div class="equipo-nombre">
+              <div class="equipo-nombre text-right">
                 <span class="equipo font-semibold text-xl">{{ partido.NombreEquipoLocal }}</span>
                 <div class="entrenador text-sm text-gray-500">Entrenador: {{ partido.EntrenadorLocal }}</div>
                 <div class="color-vestimenta text-sm text-gray-500">Vestimenta: {{ partido.ColorVestimentaLocal }}</div>
               </div>
             </div>
 
-            <span class="vs text-3xl text-gray-400 mx-8">vs</span>
+            <span class="vs text-3xl text-gray-400 mx-4 flex-shrink-0">vs</span>
 
             <!-- Equipo Visitante -->
-            <div class="equipo-info flex items-center w-1/2 space-x-6">
-              <img :src="getEquipoLogo(partido.NombreEquipoVisitante)" alt="Logo Visitante" class="equipo-logo w-20 h-20" />
-              <div class="equipo-nombre">
+            <div class="equipo-info flex items-center justify-start w-1/3 space-x-4">
+              <div class="equipo-nombre text-left">
                 <span class="equipo font-semibold text-xl">{{ partido.NombreEquipoVisitante }}</span>
                 <div class="entrenador text-sm text-gray-500">Entrenador: {{ partido.EntrenadorVisitante }}</div>
                 <div class="color-vestimenta text-sm text-gray-500">Vestimenta: {{ partido.ColorVestimentaVisitante }}</div>
               </div>
+              <img :src="getEquipoLogo(partido.NombreEquipoVisitante)" alt="Logo Visitante" class="equipo-logo w-20 h-20" />
             </div>
           </div>
 
@@ -81,7 +83,7 @@
     </div>
 
     <!-- Botón para volver atrás -->
-    <button @click="goBack" class="btn-back bg-green-600 text-white py-4 px-8 rounded-lg w-full mt-10 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+    <button @click="goBack" class="btn-back bg-yellow-600 text-white py-4 px-8 rounded-lg w-full mt-10 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
       Volver a la Página Principal
     </button>
   </div>
@@ -148,6 +150,7 @@ export default {
     goBack() {
       // Redirigir al login o la página anterior
       this.$router.push({ name: 'Home' });
+      window.scrollTo(0, 0);
     }
   }
 };
